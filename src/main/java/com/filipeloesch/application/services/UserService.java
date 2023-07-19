@@ -30,7 +30,11 @@ public class UserService {
 	}
 	
 	public void delete(Integer id) {
-		repository.deleteById(id);
+		if (repository.existsById(id)) {
+		    repository.deleteById(id);
+		} else {
+		    throw new ResourceNotFoundException(id);
+		}
 	}
 	
 	public User update(Integer id, User obj) {
