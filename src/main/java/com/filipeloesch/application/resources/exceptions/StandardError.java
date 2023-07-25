@@ -2,6 +2,8 @@ package com.filipeloesch.application.resources.exceptions;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -12,18 +14,19 @@ public class StandardError implements Serializable {
 	private Instant timestamp;
 	private Integer status;
 	private String error;
-	private String message;
 	private String path;
+	
+	private List<String> messages = new ArrayList<>();
 	
 	public StandardError() {
 	}
 
-	public StandardError(Instant timestamp, Integer status, String error, String message, String path) {
+	public StandardError(Instant timestamp, Integer status, String error, List<String> messages, String path) {
 		super();
 		this.timestamp = timestamp;
 		this.status = status;
 		this.error = error;
-		this.message = message;
+		this.messages = messages;
 		this.path = path;
 	}
 
@@ -51,19 +54,15 @@ public class StandardError implements Serializable {
 		this.error = error;
 	}
 
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
 	public String getPath() {
 		return path;
 	}
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+	
+	public List<String> getMessages() {
+		return messages;
 	}
 }
